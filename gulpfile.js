@@ -20,7 +20,7 @@ var config = {
             dest: '.',
             bust: false,
             sprite: "sprite.svg",
-            // example: true
+
         }
     },
     svg: {
@@ -35,7 +35,7 @@ gulp.task('svg', function() {
         .pipe(gulp.dest('dist/img/svgsprite/'));
 });
 
-gulp.task('default', ['concat', 'sass', 'pug', 'connect', 'watch']);
+gulp.task('default', ['concat', 'sass', 'pug', 'connect', 'svg', 'watch']);
 
 gulp.task('sprite', function() {
     var spriteData = gulp.src('dist/img/sprites/*.png').pipe(spritesmith({
@@ -57,7 +57,7 @@ gulp.task('sprite', function() {
 });
 
 function reload() {
-  gulp.src('*.html').pipe(connect.reload());
+    gulp.src('./dist/*.html').pipe(connect.reload());
 }
 
 gulp.task('pug', function() {
@@ -93,6 +93,7 @@ gulp.task('sass', function() {
 gulp.task('connect', function() {
     connect.server({
         port: 1337,
+        root: 'dist',
         livereload: true
     });
 });
